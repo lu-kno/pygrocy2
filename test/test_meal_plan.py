@@ -17,7 +17,7 @@ class TestMealPlan:
 
         assert len(meal_plan) == 12
         item = next(item for item in meal_plan if item.id == 1)
-        assert item.day.day == 18
+        assert item.day.day == 5
         assert item.recipe_id == 1
         assert item.recipe_servings == 1
         assert item.note is None
@@ -29,7 +29,7 @@ class TestMealPlan:
 
         assert len(meal_plan) == 12
         item = next(item for item in meal_plan if item.id == 1)
-        assert item.day.day == 18
+        assert item.day.day == 5
         assert item.recipe_id == 1
         assert item.recipe_servings == 1
         assert item.note is None

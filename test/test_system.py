@@ -10,9 +10,9 @@ class TestSystem:
         timestamp = grocy.get_last_db_changed()
 
         assert isinstance(timestamp, datetime)
-        assert timestamp.year == 2022
-        assert timestamp.month == 4
-        assert timestamp.day == 22
+        assert timestamp.year == 2026
+        assert timestamp.month == 1
+        assert timestamp.day == 7
 
     @pytest.mark.vcr
     def test_get_system_info_valid(self, grocy):
@@ -20,9 +20,9 @@ class TestSystem:
 
         assert isinstance(system_info, SystemInfo)
         assert isinstance(system_info.grocy_release_date, date)
-        assert system_info.grocy_version == "3.3.1"
-        assert system_info.php_version == "8.0.20"
-        assert system_info.sqlite_version == "3.38.5"
+        assert system_info.grocy_version == "4.5.0"
+        assert system_info.php_version == "8.3.19"
+        assert system_info.sqlite_version == "3.48.0"
 
     @pytest.mark.vcr
     def test_get_system_time_valid(self, grocy):
@@ -34,7 +34,7 @@ class TestSystem:
         assert isinstance(system_time.time_utc, datetime)
 
         assert system_time.timezone == "UTC"
-        assert system_time.timestamp == 1658679505
+        assert system_time.timestamp == 1767826820
 
     @pytest.mark.vcr
     def test_get_system_config_valid(self, grocy):

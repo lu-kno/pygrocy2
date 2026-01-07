@@ -10,7 +10,7 @@ class TestShoppingList:
         shopping_list = grocy.shopping_list(True)
 
         assert isinstance(shopping_list, list)
-        assert len(shopping_list) == 7
+        assert len(shopping_list) == 5
         for item in shopping_list:
             assert isinstance(item, ShoppingListProduct)
             assert isinstance(item.id, int)

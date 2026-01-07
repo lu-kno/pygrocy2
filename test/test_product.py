@@ -9,7 +9,7 @@ class TestProduct:
     def test_get_all_products(self, grocy):
         products = grocy.all_products()
 
-        assert len(products) == 26
+        assert len(products) == 29
 
         product = products[0]
         assert product.id == 1

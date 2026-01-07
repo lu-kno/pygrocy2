@@ -10,7 +10,7 @@ class TestProductGroups:
         product_groups_list = grocy.product_groups()
 
         assert isinstance(product_groups_list, list)
-        assert len(product_groups_list) == 6
+        assert len(product_groups_list) == 7
         for group in product_groups_list:
             assert isinstance(group, Group)
             assert isinstance(group.id, int)

@@ -15,10 +15,10 @@ interactions:
       accept:
       - application/json
     method: POST
-    uri: http://localhost:9192/api/tasks/3/complete
+    uri: http://localhost:9192/api/tasks/5/complete
   response:
     body:
-      string: '{"error_message":"Task does not exist"}'
+      string: ''
     headers:
       Access-Control-Allow-Headers:
       - '*'
@@ -34,11 +34,9 @@ interactions:
       - Wed, 07 Jan 2026 23:00:20 GMT
       Server:
       - nginx
-      Transfer-Encoding:
-      - chunked
       X-Powered-By:
       - PHP/8.3.19
     status:
-      code: 400
-      message: Bad Request
+      code: 204
+      message: No Content
 version: 1

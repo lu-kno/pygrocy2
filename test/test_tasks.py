@@ -12,11 +12,13 @@ class TestTasks:
     def test_get_tasks_valid(self, grocy):
         tasks = grocy.tasks()
 
-        assert len(tasks) == 5
+        assert len(tasks) == 4
         task = tasks[1]
         assert task.id == 2
         assert task.name == "Task2"
         assert isinstance(task.assigned_to_user, User)
+        assert task.assigned_to_user.id == 1
+        assert task.assigned_to_user.display_name == "Demo User"
         assert isinstance(task.category, TaskCategory)
         assert task.category.id == 1
         assert task.category.name == "Category1"
@@ -27,14 +29,14 @@ class TestTasks:
 
         assert task.id == 2
         assert task.name == "Task2"
-        assert isinstance(task.assigned_to_user, User)
-        assert isinstance(task.category, TaskCategory)
-        assert task.category.id == 1
-        assert task.category.name == "Category1"
+        assert task.assigned_to_user is None
+        assert task.assigned_to_user_id == 1
+        assert task.category is None
+        assert task.category_id == 1
 
     @pytest.mark.vcr
     def test_complete_task_valid_with_defaults(self, grocy):
-        grocy.complete_task(3)
+        grocy.complete_task(5)
 
     @pytest.mark.vcr
     def test_complete_task_valid(self, grocy):

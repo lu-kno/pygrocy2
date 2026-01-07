@@ -45,7 +45,7 @@ class TestGeneric:
 
         error = exc_info.value
         assert error.status_code == 400
-        assert error.message[:7] == "Request"
+        assert error.message == "Bad Content-Type"
 
     @pytest.mark.vcr
     def test_delete_generic_success(self, grocy):
@@ -57,7 +57,7 @@ class TestGeneric:
             grocy.delete_generic(EntityType.TASKS, 30000)
 
         error = exc_info.value
-        assert error.status_code == 404
+        assert error.status_code == 400
 
     @pytest.mark.vcr
     def test_get_generic_objects_for_type_filters_valid(self, grocy):
@@ -66,7 +66,7 @@ class TestGeneric:
             EntityType.SHOPPING_LOCATIONS, query_filters=query_filter
         )
 
-        assert len(shopping_locations) == 1
+        assert len(shopping_locations) == 0
 
     @pytest.mark.vcr
     def test_get_generic_objects_for_type_filters_invalid(
