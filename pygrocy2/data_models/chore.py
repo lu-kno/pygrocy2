@@ -88,7 +88,7 @@ class Chore(DataModel):
     def get_details(self, api_client: GrocyApiClient):
         details = api_client.get_chore(self.id)
         self._init_from_ChoreDetailsResponse(details)
-        self._userfields = api_client.get_userfields( "chores", self.id )
+        self._userfields = api_client.get_userfields("chores", self.id)
 
     @property
     def id(self) -> int:
