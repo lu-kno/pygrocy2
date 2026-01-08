@@ -37,6 +37,24 @@ tasks:
     env:
       UV_PUBLISH_TOKEN: "{{.PYPI_TOKEN}}"
     cmds:
+      - |
+        set -euo pipefail
+        package_name=$(sed -n 's/^name\s*=\s*"\([^"]*\)".*/\1/p' pyproject.toml)
+        package_version=$(sed -n 's/^version\s*=\s*"\([^"]*\)".*/\1/p' pyproject.toml)
+        if [ -z "$package_name" ] || [ -z "$package_version" ]; then
+          echo "Failed to read project name or version from pyproject.toml" >&2
+          exit 1
+        fi
+        pypi_package_json=$(curl --silent --location --fail "https://pypi.org/pypi/${package_name}/json" 2>/dev/null || true)
+        published_version_entry=""
+        if [ -n "$pypi_package_json" ]; then
+          published_version_entry=$(printf '%s' "$pypi_package_json" | grep -F '"'"$package_version"'"' || true)
+        fi
+        if [ -n "$published_version_entry" ]; then
+          echo "Version $package_version of $package_name already exists on PyPI. Aborting." >&2
+          exit 1
+        fi
+        echo "Version $package_version of $package_name is not published on PyPI yet. Continuing."
       - rm -rf dist build
       - uv build --no-sources
       - uv publish
