@@ -1,6 +1,10 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "pygrocy2"
-version = "2.5.0"
+version = "2.6.0"
 readme = "README.md"
 authors = [
     { name = "George Green", email = "iamkarlson@gmail.com" }]
@@ -31,6 +35,7 @@ dev = [
 
 [tool.uv]
 package = true
+publish-url = "https://upload.pypi.org/legacy/"
 
 [tool.ruff]
 extend-exclude = ["test/cassettes"]

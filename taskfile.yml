@@ -1,7 +1,7 @@
 version: '3'
 
 dotenv:
-  - .task.env
+  - prod.env
 
 tasks:
   install:
@@ -9,7 +9,6 @@ tasks:
     cmds:
       - uv sync --dev --frozen
       - uv pip install -e .
-      - uv pip install build twine ruff
       - uv run pre-commit install
 
   deps:
@@ -36,9 +35,8 @@ tasks:
   publish:
     desc: Build and publish the package to PyPI
     env:
-      TWINE_USERNAME: "{{.PYPI_USERNAME}}"
-      TWINE_PASSWORD: "{{.PYPI_TOKEN}}"
+      UV_PUBLISH_TOKEN: "{{.PYPI_TOKEN}}"
     cmds:
       - rm -rf dist build
-      - uv run python -m build
-      - uv run twine upload dist/*
+      - uv build --no-sources
+      - uv publish
