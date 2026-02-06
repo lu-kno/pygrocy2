@@ -125,7 +125,7 @@ class TestEquipment:
             grocy.get_equipment(999)
 
         error = exc_info.value
-        assert error.status_code == 400
+        assert error.status_code == 404
 
     @pytest.mark.vcr
     def test_get_equipment_filters_valid(self, grocy: Grocy):
