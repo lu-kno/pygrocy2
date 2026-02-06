@@ -414,7 +414,9 @@ class Grocy(object):
             return User(user)
         return None
 
-    def equipment(self, query_filters: list[str] = None, get_details: bool = False) -> list[Equipment]:
+    def equipment(
+        self, query_filters: list[str] = None, get_details: bool = False
+    ) -> list[Equipment]:
         """Return a list of equipment items."""
         raw_equipment = self._api_client.get_all_equipment(query_filters)
         equipment_items = [Equipment(item) for item in raw_equipment]
@@ -445,6 +447,7 @@ class Grocy(object):
         raw_equipment = self.get_generic_objects_for_type(EntityType.EQUIPMENT)
 
         from .grocy_api_client import EquipmentData
+
         equipment_data = [EquipmentData(**equipment) for equipment in raw_equipment]
 
         equipment_items = []

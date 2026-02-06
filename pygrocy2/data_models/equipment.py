@@ -34,7 +34,9 @@ class Equipment(DataModel):
         self._id = response.equipment.id
         self._name = response.equipment.name
         self._description = response.equipment.description
-        self._instruction_manual_file_name = response.equipment.instruction_manual_file_name
+        self._instruction_manual_file_name = (
+            response.equipment.instruction_manual_file_name
+        )
         self._created_timestamp = response.equipment.created_timestamp
         self._userfields = response.equipment.userfields
 
@@ -42,8 +44,12 @@ class Equipment(DataModel):
         self._id = response.get("id")
         self._name = response.get("name")
         self._description = response.get("description")
-        self._instruction_manual_file_name = response.get("instruction_manual_file_name")
-        self._created_timestamp = response.get("row_created_timestamp") or response.get("created_timestamp")
+        self._instruction_manual_file_name = response.get(
+            "instruction_manual_file_name"
+        )
+        self._created_timestamp = response.get("row_created_timestamp") or response.get(
+            "created_timestamp"
+        )
         self._userfields = response.get("userfields")
 
     def _init_empty(self):
