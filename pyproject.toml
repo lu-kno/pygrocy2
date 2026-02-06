@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pygrocy2"
-version = "2.6.0"
+version = "2.7.0"
 readme = "README.md"
 authors = [
     { name = "George Green", email = "iamkarlson@gmail.com" }]
