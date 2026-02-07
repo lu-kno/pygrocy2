@@ -117,6 +117,18 @@ class ChoreData(BaseModel):
         "next_execution_assigned_to_user_id"
     )
 
+class ChoreLogData(BaseModel): # TODO: Maybe not used
+    id: int
+    chore_id: int
+    tracked_time: datetime
+    done_by_user_id: int 
+    row_created_timestamp: datetime
+    undone: bool
+    undone_timestamp: datetime
+    skipped: bool
+    scheduled_execution_time: datetime
+    userfields: dict | None = None
+
 
 class UserDto(BaseModel):
     id: int
@@ -131,6 +143,18 @@ class CurrentChoreResponse(BaseModel):
     last_tracked_time: datetime | None = None
     next_estimated_execution_time: datetime | None = None
 
+
+class CurrentChoreLogResponse(BaseModel): # TODO: needs checking
+    id: int
+    chore_id: int
+    tracked_time: datetime
+    done_by_user_id: int 
+    row_created_timestamp: datetime
+    undone: bool
+    undone_timestamp: datetime
+    skipped: bool
+    scheduled_execution_time: datetime
+    userfields: dict | None = None
 
 class CurrentStockResponse(BaseModel):
     product_id: int
@@ -184,6 +208,8 @@ class ChoreDetailsResponse(BaseModel):
     next_execution_assigned_user: UserDto | None = None
     last_done_by: UserDto | None = None
 
+class ChoreLogDetailsResponse(BaseModel): # TODO: maybe not used
+    chore_log: ChoreLogData
 
 class TransactionType(Enum):
     PURCHASE = "purchase"
@@ -466,6 +492,21 @@ class GrocyApiClient(object):
         parsed_json = self._do_get_request(url)
         if parsed_json:
             return ChoreDetailsResponse(**parsed_json)
+        return None
+
+    def get_chores_log(
+        self, query_filters: list[str] | None = None
+    ) -> list[CurrentChoreLogResponse]:
+        parsed_json = self._do_get_request("chores_log", query_filters)
+        if parsed_json:
+            return [CurrentChoreLogResponse(**chore_log) for chore_log in parsed_json]
+        return []
+
+    def get_chore_log(self, chore_log_id: int) -> CurrentChoreLogResponse:
+        url = f"chores_log/{chore_log_id}"
+        parsed_json = self._do_get_request(url)
+        if parsed_json:
+            return CurrentChoreLogResponse(**parsed_json)
         return None
 
     def execute_chore(

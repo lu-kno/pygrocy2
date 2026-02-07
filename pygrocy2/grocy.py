@@ -6,6 +6,7 @@ import deprecation
 from .base import DataModel  # noqa: F401
 from .data_models.battery import Battery
 from .data_models.chore import Chore
+from .data_models.chore_log import ChoreLog
 from .data_models.equipment import Equipment
 from .data_models.generic import EntityType
 from .data_models.meal_items import MealPlanItem, MealPlanSection, RecipeItem
@@ -15,7 +16,9 @@ from .data_models.task import Task
 from .data_models.user import User  # noqa: F401
 from .errors import GrocyError  # noqa: F401
 from .grocy_api_client import ChoreDetailsResponse  # noqa: F401
+from .grocy_api_client import ChoreLogDetailsResponse  # noqa: F401
 from .grocy_api_client import CurrentChoreResponse  # noqa: F401
+from .grocy_api_client import CurrentChoreLogResponse  # noqa: F401
 from .grocy_api_client import CurrentStockResponse  # noqa: F401
 from .grocy_api_client import LocationData  # noqa: F401
 from .grocy_api_client import MealPlanResponse  # noqa: F401
@@ -122,6 +125,17 @@ class Grocy(object):
                 chore.get_details(self._api_client)
         return chores
 
+    def chores_log(
+        self, get_details: bool = False, query_filters: list[str] | None = None
+    ) -> list[ChoreLog]:
+        raw_chores_log = self._api_client.get_chores_log(query_filters)
+        chores_log = [ChoreLog(chore_log) for chore_log in raw_chores_log]
+
+        if get_details:
+            for chore_log in chores_log:
+                chore_log.get_details(self._api_client)
+        return chores_log
+
     def execute_chore(
         self,
         chore_id: int,
@@ -134,6 +148,10 @@ class Grocy(object):
     def chore(self, chore_id: int) -> Chore:
         resp = self._api_client.get_chore(chore_id)
         return Chore(resp)
+
+    def chore_log(self, chore_log_id: int) -> ChoreLog:
+        resp = self._api_client.get_chore_log(chore_log_id)
+        return ChoreLog(resp)
 
     def add_product(
         self,
