@@ -32,6 +32,34 @@ grocy = Grocy(
 
 The `Grocy` class constructs the API URL as `{base_url}:{port}/api/` (or `{base_url}:{port}/{path}/api/` when a path is provided).
 
+## Local Development with Docker
+
+The repository includes a `docker-compose.yml` that spins up a Grocy demo instance with a pre-seeded API key, so you can start experimenting immediately.
+
+**Start the instance:**
+
+```bash
+docker compose up -d
+```
+
+This launches Grocy in demo mode on `localhost:9192` and automatically inserts a
+known API key (`test_local_devenv`) into the demo database.
+
+**Connect to it:**
+
+```python
+from pygrocy2 import Grocy
+
+grocy = Grocy("http://localhost", "test_local_devenv", port=9192)
+
+for product in grocy.stock():
+    print(f"{product.name}: {product.available_amount}")
+```
+
+!!! tip
+    Check out the [Example Notebook](example.ipynb) for a runnable walkthrough
+    you can open in Jupyter.
+
 ## Working with Stock
 
 ```python

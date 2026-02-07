@@ -35,7 +35,11 @@ dev = [
 docs = [
     "mkdocs-material",
     "mkdocstrings[python]",
+    "mkdocs-jupyter",
 ]
+
+[tool.setuptools.packages.find]
+include = ["pygrocy2*"]
 
 [tool.uv]
 package = true
