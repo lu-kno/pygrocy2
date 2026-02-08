@@ -150,7 +150,7 @@ class MissingProductResponse(BaseModel):
     is_partly_in_stock: bool
 
 
-class CurrentVolatilStockResponse(BaseModel):
+class CurrentVolatileStockResponse(BaseModel):
     due_products: list[CurrentStockResponse] | None = None
     overdue_products: list[CurrentStockResponse] | None = None
     expired_products: list[CurrentStockResponse] | None = None
@@ -485,9 +485,9 @@ class GrocyApiClient(object):
             return [CurrentStockResponse(**response) for response in parsed_json]
         return []
 
-    def get_volatile_stock(self) -> CurrentVolatilStockResponse:
+    def get_volatile_stock(self) -> CurrentVolatileStockResponse:
         parsed_json = self._do_get_request("stock/volatile")
-        return CurrentVolatilStockResponse(**parsed_json)
+        return CurrentVolatileStockResponse(**parsed_json)
 
     def get_product(self, product_id) -> ProductDetailsResponse:
         url = f"stock/products/{product_id}"

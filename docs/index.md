@@ -12,15 +12,15 @@ from grocy import Grocy
 grocy = Grocy("https://your-grocy-instance.com", "YOUR_API_KEY")
 
 # Get current stock
-for product in grocy.stock():
+for product in grocy.stock.current():
     print(f"{product.name}: {product.available_amount} in stock")
 
 # Get overdue products
-for product in grocy.overdue_products():
+for product in grocy.stock.overdue_products():
     print(f"{product.name} is overdue!")
 
 # Manage shopping list
-shopping_list = grocy.shopping_list(get_details=True)
+shopping_list = grocy.shopping_list.items(get_details=True)
 for item in shopping_list:
     print(f"{item.product.name}: {item.amount}")
 ```

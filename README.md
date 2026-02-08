@@ -22,14 +22,14 @@ grocy = Grocy("https://example.com", "GROCY_API_KEY")
 or
 
 ```python
-grocy = Grocy("https://example.com", "GROCY_API_KEY", port = 9192, verify_ssl = True)
+grocy = Grocy("https://example.com", "GROCY_API_KEY", port=9192, verify_ssl=True)
 ```
 
 Get current stock:
 
 ```python
-for entry in grocy.stock():
-    print("{} in stock for product id {}".format(entry.available_amount, entry.id))
+for entry in grocy.stock.current():
+    print(f"{entry.available_amount} in stock for product id {entry.id}")
 ```
 
 # Support
@@ -38,4 +38,9 @@ If you need help using grocy check the [discussions](https://github.com/iamkarls
 
 ## Development testing
 
-You need tox and Python 3.13 to run the tests. Navigate to the root dir of `grocy` and execute `tox` to run the tests.
+You need [uv](https://docs.astral.sh/uv/) and Python 3.12+ to run the tests:
+
+```bash
+uv sync --group dev
+uv run pytest
+```
