@@ -1,10 +1,10 @@
 [build-system]
-requires = ["setuptools>=69", "wheel"]
+requires = ["setuptools>=69", "wheel", "setuptools_scm>=8"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "grocy-py"
-version = "0.0.2"
+dynamic = ["version"]
 readme = "README.md"
 authors = [
     { name = "George Green", email = "iamkarlson@gmail.com" }]
@@ -49,3 +49,7 @@ extend-exclude = ["test/cassettes"]
 
 [tool.ruff.format]
 exclude = ["test/cassettes"]
+
+[tool.setuptools_scm]
+# Fallback version for local development without git tags
+fallback_version = "0.0.0.dev0"
