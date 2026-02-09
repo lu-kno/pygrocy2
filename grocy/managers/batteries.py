@@ -35,7 +35,11 @@ class BatteryManager:
         return batteries
 
     def get(self, battery_id: int) -> Battery | None:
-        """Get a single battery by ID."""
+        """Get a single battery by ID.
+
+        Args:
+            battery_id: The Grocy battery ID.
+        """
         battery = self._api.get_battery(battery_id)
         if battery:
             return Battery.from_details_response(battery)
@@ -51,5 +55,9 @@ class BatteryManager:
         return self._api.charge_battery(battery_id, tracked_time)
 
     def undo(self, charge_cycle_id: int):
-        """Undo a battery charge cycle."""
+        """Undo a battery charge cycle.
+
+        Args:
+            charge_cycle_id: The charge cycle ID to undo.
+        """
         return self._api.undo_battery_charge(charge_cycle_id)

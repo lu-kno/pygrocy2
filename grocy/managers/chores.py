@@ -35,7 +35,11 @@ class ChoreManager:
         return chores
 
     def get(self, chore_id: int) -> Chore:
-        """Get a single chore by ID."""
+        """Get a single chore by ID.
+
+        Args:
+            chore_id: The Grocy chore ID.
+        """
         resp = self._api.get_chore(chore_id)
         return Chore.from_details_response(resp)
 
@@ -57,7 +61,11 @@ class ChoreManager:
         return self._api.execute_chore(chore_id, done_by, tracked_time, skipped)
 
     def undo(self, execution_id: int):
-        """Undo a chore execution."""
+        """Undo a chore execution.
+
+        Args:
+            execution_id: The chore execution ID to undo.
+        """
         return self._api.undo_chore_execution(execution_id)
 
     def merge(self, chore_id_keep: int, chore_id_remove: int):

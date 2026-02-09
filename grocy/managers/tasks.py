@@ -24,7 +24,11 @@ class TaskManager:
         return [Task.from_response(task) for task in raw_tasks]
 
     def get(self, task_id: int) -> Task:
-        """Get a single task by ID."""
+        """Get a single task by ID.
+
+        Args:
+            task_id: The Grocy task ID.
+        """
         resp = self._api.get_task(task_id)
         return Task.from_response(resp)
 
@@ -38,5 +42,9 @@ class TaskManager:
         return self._api.complete_task(task_id, done_time)
 
     def undo(self, task_id: int):
-        """Undo a task completion."""
+        """Undo a task completion.
+
+        Args:
+            task_id: The Grocy task ID.
+        """
         return self._api.undo_task(task_id)

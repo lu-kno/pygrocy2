@@ -34,12 +34,20 @@ class MealPlanManager:
         return meal_plan
 
     def sections(self, query_filters: list[str] | None = None) -> list[MealPlanSection]:
-        """Get all meal plan sections."""
+        """Get all meal plan sections.
+
+        Args:
+            query_filters: Optional Grocy API query filters.
+        """
         raw = self._api.get_meal_plan_sections(query_filters)
         return [MealPlanSection.from_response(section) for section in raw]
 
     def section(self, section_id: int) -> MealPlanSection | None:
-        """Get a single meal plan section by ID."""
+        """Get a single meal plan section by ID.
+
+        Args:
+            section_id: The meal plan section ID.
+        """
         section = self._api.get_meal_plan_section(section_id)
         if section:
             return MealPlanSection.from_response(section)

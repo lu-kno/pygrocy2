@@ -69,17 +69,33 @@ class ShoppingListManager:
         )
 
     def clear(self, shopping_list_id: int = 1):
-        """Remove all items from a shopping list."""
+        """Remove all items from a shopping list.
+
+        Args:
+            shopping_list_id: The shopping list ID.
+        """
         return self._api.clear_shopping_list(shopping_list_id)
 
     def add_missing_products(self, shopping_list_id: int = 1):
-        """Add all missing products to the shopping list."""
+        """Add all missing products to the shopping list.
+
+        Args:
+            shopping_list_id: The shopping list ID.
+        """
         return self._api.add_missing_product_to_shopping_list(shopping_list_id)
 
     def add_overdue_products(self, shopping_list_id: int = 1):
-        """Add all overdue products to the shopping list."""
+        """Add all overdue products to the shopping list.
+
+        Args:
+            shopping_list_id: The shopping list ID.
+        """
         return self._api.add_overdue_products_to_shopping_list(shopping_list_id)
 
     def add_expired_products(self, shopping_list_id: int = 1):
-        """Add all expired products to the shopping list."""
+        """Add all expired products to the shopping list.
+
+        Args:
+            shopping_list_id: The shopping list ID.
+        """
         return self._api.add_expired_products_to_shopping_list(shopping_list_id)

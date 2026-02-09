@@ -78,14 +78,22 @@ class StockManager:
         return products
 
     def product(self, product_id: int) -> Product | None:
-        """Get a single product by ID."""
+        """Get a single product by ID.
+
+        Args:
+            product_id: The Grocy product ID.
+        """
         resp = self._api.get_product(product_id)
         if resp:
             return Product.from_details_response(resp)
         return None
 
     def product_by_barcode(self, barcode: str) -> Product | None:
-        """Get a single product by barcode."""
+        """Get a single product by barcode.
+
+        Args:
+            barcode: The product barcode.
+        """
         resp = self._api.get_product_by_barcode(barcode)
         if resp:
             return Product.from_details_response(resp)
@@ -281,7 +289,12 @@ class StockManager:
         )
 
     def open_by_barcode(self, barcode: str, amount: float = 1):
-        """Mark stock of a product identified by barcode as opened."""
+        """Mark stock of a product identified by barcode as opened.
+
+        Args:
+            barcode: Product barcode.
+            amount: Quantity to mark as opened.
+        """
         return self._api.open_product_by_barcode(barcode, amount)
 
     def inventory_by_barcode(
@@ -323,7 +336,11 @@ class StockManager:
         return self._api.merge_products(product_id_keep, product_id_remove)
 
     def entry(self, entry_id: int):
-        """Get a single stock entry by ID."""
+        """Get a single stock entry by ID.
+
+        Args:
+            entry_id: The stock entry ID.
+        """
         return self._api.get_stock_entry(entry_id)
 
     def edit_entry(self, entry_id: int, data: dict):
@@ -336,43 +353,83 @@ class StockManager:
         return self._api.edit_stock_entry(entry_id, data)
 
     def product_entries(self, product_id: int):
-        """Get all stock entries for a product."""
+        """Get all stock entries for a product.
+
+        Args:
+            product_id: The Grocy product ID.
+        """
         return self._api.get_product_stock_entries(product_id)
 
     def product_locations(self, product_id: int):
-        """Get stock locations for a product."""
+        """Get stock locations for a product.
+
+        Args:
+            product_id: The Grocy product ID.
+        """
         return self._api.get_product_stock_locations(product_id)
 
     def product_price_history(self, product_id: int):
-        """Get price history for a product."""
+        """Get price history for a product.
+
+        Args:
+            product_id: The Grocy product ID.
+        """
         return self._api.get_product_price_history(product_id)
 
     def entries_by_location(self, location_id: int):
-        """Get all stock entries at a given location."""
+        """Get all stock entries at a given location.
+
+        Args:
+            location_id: The location ID.
+        """
         return self._api.get_stock_entries_by_location(location_id)
 
     def booking(self, booking_id: int):
-        """Get a stock booking by ID."""
+        """Get a stock booking by ID.
+
+        Args:
+            booking_id: The stock booking ID.
+        """
         return self._api.get_stock_booking(booking_id)
 
     def undo_booking(self, booking_id: int):
-        """Undo a stock booking."""
+        """Undo a stock booking.
+
+        Args:
+            booking_id: The stock booking ID.
+        """
         return self._api.undo_stock_booking(booking_id)
 
     def transaction(self, transaction_id: str):
-        """Get all log entries for a stock transaction."""
+        """Get all log entries for a stock transaction.
+
+        Args:
+            transaction_id: The transaction ID.
+        """
         return self._api.get_stock_transactions(transaction_id)
 
     def undo_transaction(self, transaction_id: str):
-        """Undo a stock transaction."""
+        """Undo a stock transaction.
+
+        Args:
+            transaction_id: The transaction ID.
+        """
         return self._api.undo_stock_transaction(transaction_id)
 
     def barcode_lookup(self, barcode: str):
-        """Look up a barcode using the external barcode lookup service."""
+        """Look up a barcode using the external barcode lookup service.
+
+        Args:
+            barcode: The barcode to look up.
+        """
         return self._api.external_barcode_lookup(barcode)
 
     def product_groups(self, query_filters: list[str] | None = None) -> list[Group]:
-        """Get all product groups."""
+        """Get all product groups.
+
+        Args:
+            query_filters: Optional Grocy API query filters.
+        """
         raw_groups = self._api.get_product_groups(query_filters)
         return [
             Group(id=resp.id, name=resp.name, description=resp.description)

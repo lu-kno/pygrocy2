@@ -32,7 +32,12 @@ class GenericEntityManager:
         )
 
     def get(self, entity_type: EntityType, object_id: int) -> dict:
-        """Get a single object by entity type and ID."""
+        """Get a single object by entity type and ID.
+
+        Args:
+            entity_type: The Grocy entity type.
+            object_id: The object ID.
+        """
         return self._api.get_generic(entity_type.value, object_id)
 
     def create(self, entity_type: EntityType, data) -> dict:

@@ -32,7 +32,11 @@ class UserManager:
         ]
 
     def get(self, user_id: int) -> User | None:
-        """Get a single user by ID."""
+        """Get a single user by ID.
+
+        Args:
+            user_id: The Grocy user ID.
+        """
         user = self._api.get_user(user_id=user_id)
         if user:
             return User(
@@ -75,7 +79,11 @@ class UserManager:
         return self._api.edit_user(user_id, data)
 
     def delete(self, user_id: int):
-        """Delete a user."""
+        """Delete a user.
+
+        Args:
+            user_id: The Grocy user ID.
+        """
         return self._api.delete_user(user_id)
 
     def settings(self):
@@ -83,7 +91,11 @@ class UserManager:
         return self._api.get_user_settings()
 
     def get_setting(self, key: str):
-        """Get a single user setting by key."""
+        """Get a single user setting by key.
+
+        Args:
+            key: The setting key.
+        """
         return self._api.get_user_setting(key)
 
     def set_setting(self, key: str, value):
@@ -96,5 +108,9 @@ class UserManager:
         return self._api.set_user_setting(key, value)
 
     def delete_setting(self, key: str):
-        """Delete a user setting."""
+        """Delete a user setting.
+
+        Args:
+            key: The setting key.
+        """
         return self._api.delete_user_setting(key)

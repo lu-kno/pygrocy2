@@ -18,18 +18,30 @@ class RecipeManager:
         self._api = api_client
 
     def get(self, recipe_id: int) -> RecipeItem | None:
-        """Get a single recipe by ID."""
+        """Get a single recipe by ID.
+
+        Args:
+            recipe_id: The Grocy recipe ID.
+        """
         recipe = self._api.get_recipe(recipe_id)
         if recipe:
             return RecipeItem.from_response(recipe)
         return None
 
     def consume(self, recipe_id: int):
-        """Consume all ingredients of a recipe from stock."""
+        """Consume all ingredients of a recipe from stock.
+
+        Args:
+            recipe_id: The Grocy recipe ID.
+        """
         return self._api.consume_recipe(recipe_id)
 
     def fulfillment(self, recipe_id: int):
-        """Get the fulfillment status of a recipe."""
+        """Get the fulfillment status of a recipe.
+
+        Args:
+            recipe_id: The Grocy recipe ID.
+        """
         return self._api.get_recipe_fulfillment(recipe_id)
 
     def all_fulfillment(self):
@@ -37,9 +49,17 @@ class RecipeManager:
         return self._api.get_all_recipes_fulfillment()
 
     def copy(self, recipe_id: int):
-        """Create a copy of a recipe."""
+        """Create a copy of a recipe.
+
+        Args:
+            recipe_id: The Grocy recipe ID.
+        """
         return self._api.copy_recipe(recipe_id)
 
     def add_not_fulfilled_to_shopping_list(self, recipe_id: int):
-        """Add unfulfilled recipe ingredients to the shopping list."""
+        """Add unfulfilled recipe ingredients to the shopping list.
+
+        Args:
+            recipe_id: The Grocy recipe ID.
+        """
         return self._api.add_not_fulfilled_to_shopping_list(recipe_id)

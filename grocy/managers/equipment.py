@@ -36,14 +36,22 @@ class EquipmentManager:
         return equipment_items
 
     def get(self, equipment_id: int) -> Equipment | None:
-        """Get a single equipment item by ID."""
+        """Get a single equipment item by ID.
+
+        Args:
+            equipment_id: The Grocy equipment ID.
+        """
         equipment_data = self._api.get_equipment(equipment_id)
         if equipment_data:
             return Equipment.from_details_response(equipment_data)
         return None
 
     def get_by_name(self, name: str) -> Equipment | None:
-        """Get a single equipment item by name."""
+        """Get a single equipment item by name.
+
+        Args:
+            name: The equipment name to search for.
+        """
         query_filters = [f"name={name}"]
         equipment_items = self.list(query_filters, True)
         if equipment_items and len(equipment_items) > 0:
